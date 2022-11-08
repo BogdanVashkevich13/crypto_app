@@ -15,9 +15,6 @@ class _NewsScreenState extends State<NewsScreen> {
   @override
   Widget build(BuildContext context) {
     return  BlocBuilder<NewsBloc, NewsState>(builder: (context, state) {
-      if (state is NewsEmptyState) {
-        return Text('no data');
-      }
       if (state is NewsLoadingState) {
         return const Center(
           child: CircularProgressIndicator(),

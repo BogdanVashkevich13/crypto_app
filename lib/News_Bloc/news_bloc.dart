@@ -6,7 +6,7 @@ import 'news_state.dart';
 
 class NewsBloc extends Bloc<NewsEvent, NewsState>{
   final NewsRepository newsRepository;
-  NewsBloc(this.newsRepository): super(NewsEmptyState()){
+  NewsBloc(this.newsRepository): super(NewsLoadingState()){
     on<NewsLoadEvent>((event, emit) async {
       emit(NewsLoadingState());
       try{

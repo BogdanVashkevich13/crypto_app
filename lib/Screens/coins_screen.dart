@@ -48,7 +48,7 @@ class _CoinsScreenState extends State<CoinsScreen> {
            children: [
              Row(
                children: [
-                 SizedBox(width: 55,),
+                 const SizedBox(width: 55,),
                  ElevatedButton(onPressed: () async {
                    if (await controller.canGoBack()) {
                      await controller.goBack();
@@ -59,8 +59,8 @@ class _CoinsScreenState extends State<CoinsScreen> {
                      return;
                    }
                  },
-                     child: Text('Go Back')),
-                 SizedBox(width: 25,),
+                     child: const Text('Go Back')),
+                 const SizedBox(width: 25,),
                  ElevatedButton(onPressed: () async {
                    if (await controller.canGoForward()) {
                    await controller.goForward();
@@ -71,12 +71,12 @@ class _CoinsScreenState extends State<CoinsScreen> {
                    return;
                    }
                  },
-                     child: Text('forward')),
-                 SizedBox(width: 25,),
+                     child: const Text('forward')),
+                 const SizedBox(width: 25,),
                  ElevatedButton(onPressed: () async {
                    controller.reload();
                  },
-                     child: Text('Update')),
+                     child: const Text('Update')),
                ],
              ),
            ],
