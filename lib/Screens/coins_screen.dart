@@ -15,32 +15,74 @@ class _CoinsScreenState extends State<CoinsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: WebView(
-        javascriptMode: JavascriptMode.unrestricted,
-        initialUrl: 'https://www.investing.com/crypto/',
-        onWebViewCreated: (controller) {
-          this.controller = controller;
-          controller.runJavascriptReturningResult("document.getElementsByTagName('header')[0].style.display='none'");
-        },
-        onPageStarted: (url){
-          controller.evaluateJavascript(
-              "document.getElementsByTagName('header')[0].style.display='none'"
-          );
-          controller.evaluateJavascript("document.getElementsByTagName('footer')[0].style.display='none'");
-        },
-        onProgress: (url){
-          controller.evaluateJavascript(
-              "document.getElementsByTagName('header')[0].style.display='none'"
-          );
-          controller.evaluateJavascript("document.getElementsByTagName('footer')[0].style.display='none'");
-        },
-        onPageFinished: (url) {
-          controller.evaluateJavascript(
-              "document.getElementsByTagName('header')[0].style.display='none'"
-          );
-          controller.evaluateJavascript("document.getElementsByTagName('footer')[0].style.display='none'");
-        },
-      ),
+      body: Stack(
+        children: [
+          WebView(
+            javascriptMode: JavascriptMode.unrestricted,
+            initialUrl: 'https://www.investing.com/crypto/',
+            onWebViewCreated: (controller) {
+              this.controller = controller;
+              controller.runJavascriptReturningResult("document.getElementsByTagName('header')[0].style.display='none'");
+            },
+            onPageStarted: (url){
+              controller.evaluateJavascript(
+                  "document.getElementsByTagName('header')[0].style.display='none'"
+              );
+              controller.evaluateJavascript("document.getElementsByTagName('footer')[0].style.display='none'");
+            },
+            onProgress: (url){
+              controller.evaluateJavascript(
+                  "document.getElementsByTagName('header')[0].style.display='none'"
+              );
+              controller.evaluateJavascript("document.getElementsByTagName('footer')[0].style.display='none'");
+            },
+            onPageFinished: (url) {
+              controller.evaluateJavascript(
+                  "document.getElementsByTagName('header')[0].style.display='none'"
+              );
+              controller.evaluateJavascript("document.getElementsByTagName('footer')[0].style.display='none'");
+            },
+          ),
+         Column(
+           mainAxisAlignment: MainAxisAlignment.end,
+           children: [
+             Row(
+               children: [
+                 SizedBox(width: 55,),
+                 ElevatedButton(onPressed: () async {
+                   if (await controller.canGoBack()) {
+                     await controller.goBack();
+                   } else {
+                     ScaffoldMessenger.of(context).showSnackBar(
+                       const SnackBar(content: Text('No back history item')),
+                     );
+                     return;
+                   }
+                 },
+                     child: Text('Go Back')),
+                 SizedBox(width: 25,),
+                 ElevatedButton(onPressed: () async {
+                   if (await controller.canGoForward()) {
+                   await controller.goForward();
+                   } else {
+                   ScaffoldMessenger.of(context).showSnackBar(
+                   const SnackBar(content: Text('No forward history item')),
+                   );
+                   return;
+                   }
+                 },
+                     child: Text('forward')),
+                 SizedBox(width: 25,),
+                 ElevatedButton(onPressed: () async {
+                   controller.reload();
+                 },
+                     child: Text('Update')),
+               ],
+             ),
+           ],
+         ),
+        ],
+      )
     );
   }
 }
@@ -71,4 +113,12 @@ class _CoinsScreenState extends State<CoinsScreen> {
 // color: Colors.purple,
 // ),
 // ],
-// );
+// );\
+
+
+// floatingActionButton: FloatingActionButton(
+// onPressed: (){
+// controller.reload();
+// },
+// child: Icon(Icons.update),
+// ),
