@@ -1,7 +1,7 @@
 import 'package:crypto_app/Colors/colors.dart';
 import 'package:crypto_app/News_Bloc/news_bloc.dart';
 import 'package:crypto_app/Screens/coins_screen.dart';
-import 'package:crypto_app/Screens/fcts_screen.dart';
+import 'package:crypto_app/Screens/facts_screen.dart';
 import 'package:crypto_app/Screens/news_screen.dart';
 import 'package:crypto_app/news_api/news_repository.dart';
 import 'package:crypto_app/news_list.dart';

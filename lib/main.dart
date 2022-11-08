@@ -1,4 +1,6 @@
 import 'package:crypto_app/Colors/colors.dart';
+import 'package:crypto_app/Pages/facts_details_page.dart';
+import 'package:crypto_app/Pages/news_details_page.dart';
 import 'package:flutter/material.dart';
 
 import 'Pages/home_page.dart';
@@ -29,6 +31,8 @@ class MyApp extends StatelessWidget {
         initialRoute: '/',
         routes: {
           '/':(BuildContext context) => HomePage(),
+          '/news_details': (BuildContext context) => const NewsDetailsPage(),
+          '/facts_details': (BuildContext context) => const FactsDetailsPage(),
           //'/HomePage': (BuildContext context) => HomePage(),
         }
     );

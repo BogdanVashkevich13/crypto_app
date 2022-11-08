@@ -12,6 +12,13 @@ class NewsScreen extends StatefulWidget {
 }
 
 class _NewsScreenState extends State<NewsScreen> {
+
+  void _onNewsTab (int index) {
+    //final title = _news[index].title;
+    Navigator.of(context).pushNamed('/news_details');
+    //arguments: title,
+  }
+
   @override
   Widget build(BuildContext context) {
     return  BlocBuilder<NewsBloc, NewsState>(builder: (context, state) {
@@ -27,7 +34,7 @@ class _NewsScreenState extends State<NewsScreen> {
               return Padding(
                   padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
                   child: GestureDetector(
-                    onTap: () {},
+                    onTap: () =>  _onNewsTab(index),
                     child:  Container(
                       decoration: BoxDecoration(
                         color: ColorsSet.white,
