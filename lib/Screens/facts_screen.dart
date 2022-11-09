@@ -47,21 +47,21 @@ class _FactsScreenState extends State<FactsScreen> {
                           Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
-                              children:  const [
+                              children:   [
                                 SizedBox(
                                   height: 5,
                                 ),
                                 Text(
-                                  'Title:',
-                                  maxLines: 1,
+                                  'Title: ${state.loadedFacts[index].title}',
+                                  maxLines: 5,
                                   overflow: TextOverflow.ellipsis,
                                 ),
                                 SizedBox(
                                   height: 5,
                                 ),
                                 Text(
-                                  'Description:',
-                                  maxLines: 3,
+                                  'Description: ${state.loadedFacts[index].description}',
+                                  maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                 ),
                               ],

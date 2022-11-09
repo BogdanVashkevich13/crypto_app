@@ -1,4 +1,6 @@
 import 'package:crypto_app/Colors/colors.dart';
+import 'package:crypto_app/Facts_Bloc/Facts_Bloc.dart';
+import 'package:crypto_app/Facts_api/facts_repository.dart';
 import 'package:crypto_app/News_Bloc/news_bloc.dart';
 import 'package:crypto_app/Screens/coins_screen.dart';
 import 'package:crypto_app/Screens/facts_screen.dart';
@@ -15,6 +17,7 @@ class HomePage extends StatefulWidget {
   @override
   State<HomePage> createState() => _HomePageState();
 }
+final factsRepository = FactsRepository();
 final newsRepository = NewsRepository();
 class _HomePageState extends State<HomePage> {
   @override
@@ -33,8 +36,17 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget build(BuildContext context) {
-    return BlocProvider(
-        create: (context) => NewsBloc(newsRepository),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+            create: (context) => NewsBloc(newsRepository),
+        ),
+        BlocProvider(
+            create: (context) => FactsBloc(factsRepository),
+        ),
+      ],
+      // BlocProvider(
+      //   create: (context) => NewsBloc(newsRepository),
       child:  Scaffold(
         appBar: AppBar(
           centerTitle: true,
