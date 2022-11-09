@@ -13,10 +13,9 @@ class NewsScreen extends StatefulWidget {
 
 class _NewsScreenState extends State<NewsScreen> {
 
+
   void _onNewsTab (int index) {
-    //final title = _news[index].title;
     Navigator.of(context).pushNamed('/news_details');
-    //arguments: title,
   }
 
   @override
@@ -29,12 +28,12 @@ class _NewsScreenState extends State<NewsScreen> {
       }
       if (state is NewsLoadedState) {
         return ListView.builder(
-            itemCount: 15,
+            itemCount: 50,
             itemBuilder: (BuildContext context, int index) {
               return Padding(
                   padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
                   child: GestureDetector(
-                    onTap: () =>  _onNewsTab(index),
+                    onTap: () => _onNewsTab(index),
                     child:  Container(
                       decoration: BoxDecoration(
                         color: ColorsSet.white,

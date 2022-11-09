@@ -4,7 +4,6 @@ import 'package:crypto_app/Screens/coins_screen.dart';
 import 'package:crypto_app/Screens/facts_screen.dart';
 import 'package:crypto_app/Screens/news_screen.dart';
 import 'package:crypto_app/news_api/news_repository.dart';
-import 'package:crypto_app/news_list.dart';
 import 'package:flutter/material.dart';
 import 'package:crypto_font_icons/crypto_font_icons.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
