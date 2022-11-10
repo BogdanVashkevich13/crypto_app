@@ -26,6 +26,13 @@ class NewsApiProvider{
 // final List<dynamic> newsJson = json.decode(responce.body);
 // return newsJson.map((json) => News.fromJson(json)).toList();
 
+// if (responce.statusCode == 200){
+// String data = responce.body;
+// var jsonData = jsonDecode(data);
+// ArticlesListModel articles = ArticlesListModel.fromMap(jsonData);
+// List<News> articlesListModel =
+// articles.articles!.map((e) => News.fromMap(e)).toList();
+// return articlesListModel;
 
 // String data = responce.body;
 // var jsonData = jsonDecode(data);
@@ -33,3 +40,5 @@ class NewsApiProvider{
 // List<News> newsListModel =
 // articles.news!.map((e) => News.fromMap(e)).toList();
 // return newsListModel;
+
+//https://newsapi.org/v2/everything?q=bitcoin&apiKey=a8fb3bd1042c4c31a4241ec461192539

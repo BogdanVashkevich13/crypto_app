@@ -1,11 +1,9 @@
-import 'package:crypto_app/Colors/colors.dart';
 import 'package:crypto_app/News_Bloc/news_bloc.dart';
 import 'package:crypto_app/News_Bloc/news_state.dart';
-import 'package:crypto_app/Pages/news_details_page.dart';
-import 'package:crypto_app/news_api/news.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class NewsScreen extends StatefulWidget {
   const NewsScreen({Key? key}) : super(key: key);
@@ -15,7 +13,6 @@ class NewsScreen extends StatefulWidget {
 }
 
 class _NewsScreenState extends State<NewsScreen> {
-
   late ExpandableController controller;
 
   @override
@@ -23,6 +20,7 @@ class _NewsScreenState extends State<NewsScreen> {
     super.initState();
     controller = ExpandableController();
   }
+
   @override
   void disponce() {
     controller.dispose();
@@ -46,69 +44,85 @@ class _NewsScreenState extends State<NewsScreen> {
       }
       if (state is NewsLoadedState) {
         return ListView.builder(
-            itemCount: 20,
             itemBuilder: (BuildContext context, int index) {
-              return Padding(padding: EdgeInsets.all(10),
+              return Padding(
+                padding: EdgeInsets.all(10),
                 child: ExpandableNotifier(
-                    child: Card(
-                      clipBehavior: Clip.antiAlias,
-                      child: Column(
-                        children: <Widget> [
-                          GestureDetector(
+                  child: Card(
+                    clipBehavior: Clip.antiAlias,
+                    child: Column(
+                      children: <Widget>[
+                        GestureDetector(
                             onTap: () => controller.toggle(),
-                            child: Image.asset('images/Bitcoin.png'),
-                          ),
-                          SizedBox(height: 10,),
-                          //Image.asset('${state.loadedNews[index].urlToImage}'),
-                          ScrollOnExpand(
-                              child: ExpandablePanel(
-                                controller: controller,
-                                theme: const ExpandableThemeData(
-                                  expandIcon: Icons.arrow_drop_down,
-                                  collapseIcon: Icons.close,
-                                  tapBodyToCollapse: true,
-                                  tapBodyToExpand: true,
-                                ),
-                                builder: (_, collapsed, expanded) => Padding(
-                                  padding: EdgeInsets.all(10).copyWith(top: 0),
-                                  child: Expandable(
-                                    expanded: expanded,
-                                    collapsed: collapsed ,
+                            child: Image.network(
+                                state.loadedNews[index].urlToImage)),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        ScrollOnExpand(
+                          child: ExpandablePanel(
+                            controller: controller,
+                            theme: const ExpandableThemeData(
+                              expandIcon: Icons.arrow_drop_down,
+                              collapseIcon: Icons.close,
+                              tapBodyToCollapse: true,
+                              tapBodyToExpand: true,
+                            ),
+                            builder: (_, collapsed, expanded) => Padding(
+                              padding:
+                                  const EdgeInsets.all(10).copyWith(top: 0),
+                              child: Expandable(
+                                expanded: expanded,
+                                collapsed: collapsed,
+                              ),
+                            ),
+                            header: Padding(
+                              padding:
+                                  const EdgeInsets.all(10).copyWith(top: 0),
+                              child: Text(
+                                state.loadedNews[index].title,
+                                style: GoogleFonts.lato(
+                                  textStyle: const TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                                header: Padding(padding: EdgeInsets.all(10).copyWith(top: 0),
-                                  child: Text('Title: ${state.loadedNews[index].title}'),
-                                ),
-                                collapsed: Text(
-                                  'Author: ${state.loadedNews[index].author}',
-                                  softWrap: true,
-                                  maxLines: 2,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                                expanded: Text(
-                                  'Description: ${state.loadedNews[index].description}',
-                                  softWrap: true,
-                                ),
                               ),
+                            ),
+                            collapsed: Text(
+                              'Author: ${state.loadedNews[index].author}',
+                              softWrap: true,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                fontSize: 15,
+                              ),
+                            ),
+                            expanded: Text(
+                              'Description: ${state.loadedNews[index].description}',
+                              softWrap: true,
+                              style: const TextStyle(
+                                fontSize: 15,
+                              ),
+                            ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
+                  ),
                 ),
               );
-            }
-        );
+            });
       }
       if (state is NewsErorState) {
         return const Center(
-          child: Text('Eror'),
+          child: Text('Error'),
         );
       }
       return const SizedBox.shrink();
     });
   }
 }
-
 
 // ExpandablePanel(
 // header: Text('Title: ${state.loadedNews[index].title}'),

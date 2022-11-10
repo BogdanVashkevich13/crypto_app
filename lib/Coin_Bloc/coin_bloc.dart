@@ -7,14 +7,18 @@ import '../coin_api/coin_repository.dart';
 class CoinBloc extends Bloc<CoinEvent, CoinState>{
   final CoinRepository coinRepository;
   CoinBloc(this.coinRepository): super(CoinLoadingState()){
+    _loadCoins();
     on<CoinLoadEvent>((event, emit) async {
       emit(CoinLoadingState());
-          try{
-       final List<Coins> loadedCoinList = await coinRepository.getAllCoins();
-       emit(CoinLoadedState(loadedCoin:  loadedCoinList));
-          } catch (_){
-        emit(CoinErorState());
-          }
+      _loadCoins();
     });
+  }
+  Future<void> _loadCoins() async {
+    try{
+      final List<Coins> loadedCoinList = await coinRepository.getAllCoins();
+      emit(CoinLoadedState(loadedCoin: loadedCoinList));
+    } catch (_){
+      emit(CoinErorState());
+    }
   }
 }
